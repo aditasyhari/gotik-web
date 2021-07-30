@@ -1,0 +1,106 @@
+{% extends "frontend/layouts/base-fullscreen.html" %}
+
+{% block title %} Berita {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/frontend/css/berita.css">
+{% endblock %}
+
+{% block content %}
+<div id="details" class="basic-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="scan-header">
+                    <h2>Berita Batik</h2>
+                    <form id="upload" method="post" action="">
+					    {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Cari..." aria-describedby="button-addon2" name="cari" required>
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-outline-primary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <section class="dark">
+                <div class="container py-4">
+                    {% for b in berita %}
+                    <article class="postcard dark blue">
+                        <a class="postcard__img_link" href="/berita/{{b.slug}}">
+                            <img class="postcard__img" src="{{ b.thumbnail }}" alt="Image Title" />
+                        </a>
+                        <div class="postcard__text">
+                            <h1 class="postcard__title"><a href="/berita/{{b.slug}}">{{ b.judul }}</a></h1>
+                            <div class="postcard__subtitle small">
+                                <time datetime="2020-05-25 12:00:00">
+                                    <i class="fas fa-calendar-alt mr-2"></i>{{ b.updated_at }}
+                                </time>
+                            </div>
+                            <div class="postcard__bar"></div>
+                            <div class="postcard__preview-txt">
+                                {% autoescape off %}{{ b.isi|striptags|slice:"0:250" }}{% endautoescape %}...
+                            </div>
+                            <ul class="postcard__tagbox">
+                                <li class="tag__item"><i class="fas fa-tag mr-2"></i>Batik</li>
+                                <li class="tag__item"><i class="fas fa-clock mr-2"></i><span id="durasi{{b.id}}"></span></li>
+                            </ul>
+                            <div id="isi{{b.id}}" style="display: none;">{{ b.isi|safe }}</div>
+                            <script>
+                                function reading() {
+                                    const isi = document.getElementById('isi{{b.id|escapejs}}').innerText;
+                                    const durasi = document.getElementById('durasi{{b.id|escapejs}}');
+    
+                                    const wpm = 250;
+                                    const jumlahKata = isi.trim().split(/\S+/).length;
+                                    const rumus = Math.ceil(jumlahKata / wpm);
+                                    const result = `${rumus} min`
+                                    
+                                    durasi.innerText = result
+                                }
+                                reading();
+                            </script>
+                        </div>
+                    </article>
+                    {% endfor %}
+
+                </div>
+            </section>
+        </div>
+        <div class="row">
+            <div class="col-12 align-center text-center">
+                <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">
+        
+                    <ul class="pagination">
+                        {% if berita.has_previous %}
+                            <li class="pagination-item--wide first"> <a class="pagination-link--wide first" href="?page={{ berita.previous_page_number }}">
+                        {% else %}
+                            <li class="pagination-item--wide first disabled"> <a class="pagination-link--wide first" href="#">
+                        {% endif %}
+                        Previous</a></li>
+                        {% for p in berita.paginator.page_range %}
+                            <li class="pagination-item first-number {% if p == berita.number %}active{% endif %}"> <a class="pagination-link" href="?page={{ p }}">{{ p }}</a> </li>
+                        {% endfor %}
+                        {% if berita.has_next %}
+                            <li class="pagination-item--wide last"> <a class="pagination-link--wide last" href="?page={{ berita.next_page_number }}">
+                        {% else %}
+                            <li class="pagination-item--wide last disabled"> <a class="pagination-link--wide last" href="#">
+                        {% endif %}
+                        Next</a></li>
+                    </ul>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block js %}
+
+{% endblock %}

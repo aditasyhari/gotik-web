@@ -1,0 +1,113 @@
+{% extends "frontend/layouts/base-fullscreen.html" %}
+
+{% block title %} Toko Batik {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/frontend/css/toko_batik.css">
+<style>
+    .maps iframe{
+        width: 100% !important;
+        height: 100% !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="details" class="basic-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="scan-header">
+                    <h2>Toko Batik</h2>
+                    <!-- <p></p> -->
+                    <form id="upload" method="post" action="">
+					    {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Cari..." aria-describedby="button-addon2" name="cari" required>
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-outline-primary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5 mb-5">
+            {% for t in toko %}
+            <div class="col-md-4">
+                <div class="card front">
+                    <div class="maps">
+                        {% autoescape off %}{{ t.frame_maps }}{% endautoescape %}
+                    </div>
+                    <div class="blue"></div>
+                    <div class="yellow"></div>
+                    <div class="orange"></div>
+                    <div class="dots"></div>
+                    <div class="personal-intro card-overlay">
+                        <p>{{ t.nama_toko }}</p>
+                        <!-- <p>Photographer Maker Doer</p> -->
+                    </div>
+                </div>
+                <div class="card back mb-5">
+                    <div class="orange"></div>
+                    <div class="top dots"></div>
+                    <div class="personal-info">
+                        <p>{{ t.nama_toko }}</p>
+                        <p>{{ t.alamat }}</p>
+                    </div>
+                    <div class="bottom dots"></div>
+                    <div class="blue">
+                        <a class="btn btn-info text-decoration-none pr-4 pl-4 detail" href="toko-batik/{{ t.slug }}" role="button" title="Detail"><i class="fas fa-long-arrow-alt-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+
+        <div class="row">
+            <div class="col-12 align-center text-center">
+
+                <div class="pagination-container wow zoomIn mar-b-1x" data-wow-duration="0.5s">
+        
+                    <!-- <ul class="pagination">
+                        <li class="pagination-item--wide first"> <a class="pagination-link--wide first" href="#">Previous</a> </li>
+                        <li class="pagination-item active first-number"> <a class="pagination-link" href="#">1</a> </li>
+                        <li class="pagination-item"> <a class="pagination-link" href="#">2</a> </li>
+                        <li class="pagination-item"> <a class="pagination-link" href="#">3</a> </li>
+                        <li class="pagination-item"> <a class="pagination-link" href="#">4</a> </li>
+                        <li class="pagination-item"> <a class="pagination-link" href="#">5</a> </li>
+                        <li class="pagination-item--wide last"> <a class="pagination-link--wide last" href="#">Next</a> </li>
+                    </ul> -->
+                
+                    <ul class="pagination">
+                        {% if toko.has_previous %}
+                            <li class="pagination-item--wide first"> <a class="pagination-link--wide first" href="?page={{ toko.previous_page_number }}">
+                        {% else %}
+                            <li class="pagination-item--wide first disabled"> <a class="pagination-link--wide first" href="#">
+                        {% endif %}
+                        Previous</a></li>
+                        {% for p in toko.paginator.page_range %}
+                            <li class="pagination-item first-number {% if p == toko.number %}active{% endif %}"> <a class="pagination-link" href="?page={{ p }}">{{ p }}</a> </li>
+                        {% endfor %}
+                        {% if toko.has_next %}
+                            <li class="pagination-item--wide last"> <a class="pagination-link--wide last" href="?page={{ toko.next_page_number }}">
+                        {% else %}
+                            <li class="pagination-item--wide last disabled"> <a class="pagination-link--wide last" href="#">
+                        {% endif %}
+                        Next</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block js %}
+
+{% endblock %}

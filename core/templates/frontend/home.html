@@ -1,0 +1,149 @@
+{% extends "frontend/layouts/base-fullscreen.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<header id="header" class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="text-container">
+                    <h1 class="h1-large">GO Batik Banyuwangi </h1>
+                    <p class="p-large">Aplikasi cerdas yang siap membantu anda mengenali motif batik Banyuwangi.</p>
+                    <a class="btn-solid-lg" href="{% url 'scan' %}">Scan Now</a>
+                    <!-- <a class="btn-outline-lg page-scroll" href="#intro">Discover</a> -->
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="image-container">
+                    <img class="img-fluid" src="/static/frontend/images/header2.png" alt="alternative">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Batik -->
+<div class="slider-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Motif <span>Batik</span> yang dapat dikenali Gotik</h4>
+                <hr class="section-divider">
+
+                <div class="slider-container">
+                    <div class="swiper-container image-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <!-- <img class="img-fluid" src="images/customer-logo-5.png" alt="alternative"> -->
+                                <h5 class="text-secondary text-uppercase">Beras Kutah</h5>
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- <img class="img-fluid" src="images/customer-logo-1.png" alt="alternative"> -->
+                                <h5 class="text-secondary text-uppercase">Gajah Uling</h5>
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- <img class="img-fluid" src="images/customer-logo-3.png" alt="alternative"> -->
+                                <h5 class="text-secondary text-uppercase">Kopi Sembur</h5>
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- <img class="img-fluid" src="images/customer-logo-4.png" alt="alternative"> -->
+                                <h5 class="text-secondary text-uppercase">Mata Ikan</h5>
+                            </div>
+                            <div class="swiper-slide">
+                                <!-- <img class="img-fluid" src="images/customer-logo-6.png" alt="alternative"> -->
+                                <h5 class="text-secondary text-uppercase">Sekar Jagad</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Introduction -->
+<div id="intro" class="basic-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <img class="img-fluid" src="/static/frontend/images/kain-batik.jpg" alt="alternative">
+            </div>
+            <div class="col-lg-5">
+                <div class="text-container">
+                    <h2>Gotik (Go Batik)</h2>
+                    <p>Go Batik atau yang disingkat Gotik, merupakan aplikasi cerdas untuk mendeteksi motif batik dan mapping toko batik guna melestarikan kain batik Banyuwangi.</p>
+                    <!-- <a class="btn-solid-reg" href="sign-up.html">Sign up</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features -->
+<div id="features" class="cards-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="h2-heading">Cek semua fitur Gotik</h2>
+                <p class="p-heading">Fitur - fitur yang ada di Gotik dirancang untuk membantu masyarakat mengetahui informasi tentang batik terutama batik Banyuwangi</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                
+                <div class="card">
+                    <div class="card-icon-wrapper">
+                        <div class="card-icon">
+                            <span class="fas fa-search green"></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Deteksi Motif Batik</h4>
+                        <p>Fitur ini membantu anda untuk mengenali motif batik Banyuwangi</p>
+                        <a class="read-more no-line" href="/scan">Scan Now <span class="fas fa-long-arrow-alt-right"></span></a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon-wrapper">
+                        <div class="card-icon">
+                            <span class="fas fa-store blue"></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Mapping Toko Batik</h4>
+                        <p>Fitur ini guna untuk mapping lokasi toko atau produsen batik di Banyuwangi</p>
+                        <a class="read-more no-line" href="/toko-batik">Lihat Toko <span class="fas fa-long-arrow-alt-right"></span></a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon-wrapper">
+                        <div class="card-icon">
+                            <span class="fas fa-newspaper purple"></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Berita / Artikel Batik</h4>
+                        <p>Fitur ini membantu anda untuk update informasi seputar batik</p>
+                        <a class="read-more no-line" href="/berita">Lihat Berita <span class="fas fa-long-arrow-alt-right"></span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+{% endblock %}

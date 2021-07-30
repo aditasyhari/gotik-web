@@ -1,0 +1,161 @@
+{% extends "admin/layouts/base.html" %}
+
+{% block title %} Sejarah Batik {% endblock %} 
+
+{% block css %}
+<!-- <script src="/static/assets/js/pages/maps.js"></script> -->
+<style>
+    tr td .btn {
+        padding: 5px;
+        margin-right: 0;
+    }
+
+    tr td .btn i {
+        margin: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <!-- [ Hover-table ] start -->
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div>
+                                        <h5>Daftar Sejarah Batik</h5>
+                                        <span class="d-block m-t-5">Sejarah batik <code>Banyuwangi</code> yang dapat diidentifikasi Gotik.</span>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="feather icon-plus"></i>Add</button>
+                                    <!-- <button class="text-center btn btn-sm btn-primary"><i class="feather icon-plus"></i> Add</button> -->
+                                </div>
+                                <div class="card-block table-border-style">
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                    <div class="table-responsive">
+                                        <table id="table" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%">#</th>
+                                                    <th style="width: 60%">Judul</th>
+                                                    <th style="width: 20%">Kategori</th>
+                                                    <th style="width: 15%"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for s in sejarah %}
+                                                <tr>
+                                                    <th scope="row">{{ forloop.counter }}</th>
+                                                    <td style="white-space: normal;"><a href="sejarah/{{ s.slug }}">{{ s.judul }}</a></td>
+                                                    <td style="white-space: normal;">{{ s.kategori }}</td>
+                                                    <td style="white-space: normal;">
+                                                        <a class="btn btn-info" title="Edit" href="sejarah/edit/{{ s.slug }}"> <i class="feather icon-edit-2"></i></a>
+                                                        <a class="btn btn-danger" title="Delete" href="sejarah/delete/{{ s.slug }}"><i class="feather icon-trash-2"></i></a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Tambah Sejarah Batik</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="add-form" method="post" action="" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <!-- <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <div class="custom-file">
+                                                                    <input type="file" class="custom-file-input" id="inputGroupFile01" name="thumbnail" required>
+                                                                    <label class="custom-file-label" for="inputGroupFile01">Thumbnail Sejarah</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div> -->
+                                                            <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label">Judul:</label>
+                                                                <input type="text" class="form-control" id="" name="judul" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label">Kategori:</label>
+                                                                <input type="text" class="form-control" id="" name="kategori">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="message-text" class="col-form-label">Isi:</label>
+                                                                <textarea id="isi" class="form-control" id="message-text" name="isi" required></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-primary" onclick="$('#add-form').submit()">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- [ Hover-table ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block js %}
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA372PcuJQKYrKADjhHTLLDVcfsoCzF-4M&callback=initAutocomplete&libraries=places&v=weekly" async ></script> -->
+
+
+    <script>
+        $(document).ready(function() {
+            $('#table').DataTable();
+        });
+    </script>
+
+    <script src="/static/assets/tinymce/js/tinymce/tinymce.min.js"></script>
+
+    <script>
+        var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        tinymce.init({
+            selector: 'textarea#isi',
+            plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+            menubar: 'file edit view insert format tools table help',
+            toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+            height: 400,
+            quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+            noneditable_noneditable_class: 'mceNonEditable',
+            toolbar_mode: 'sliding',
+            contextmenu: 'link image imagetools table',
+            skin: useDarkMode ? 'oxide-dark' : 'oxide',
+            content_css: useDarkMode ? 'dark' : 'default',
+        });
+    </script>
+{% endblock %}

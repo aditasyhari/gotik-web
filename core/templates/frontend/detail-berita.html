@@ -1,0 +1,64 @@
+{% extends "frontend/layouts/base-fullscreen.html" %}
+
+{% block title %} Detail Berita {% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+
+<header class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-10 offset-xl-1">
+                <h1>{{ berita.judul }}</h1>
+                <hr>
+                <div class="text-secondary">
+                    <i class="fas fa-calendar-alt mr-2"></i> {{ berita.updated_at }}
+                </div>
+                <div class="text-secondary">
+                    <i class="fas fa-clock mr-2"></i><span id="durasi"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="ex-basic-1 pt-5 pb-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <img class="img-fluid mb-3" src="{{ berita.thumbnail }}" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ex-basic-1 pt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-10 offset-xl-1">
+                {% autoescape off %}{{ berita.isi }}{% endautoescape %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    function reading() {
+        const isi = "{{ berita.isi|striptags|safe|escapejs }}"
+        const durasi = document.getElementById('durasi{{b.id|escapejs}}');
+
+        const wpm = 250;
+        const jumlahKata = isi.trim().split(/\S+/).length;
+        const rumus = Math.ceil(jumlahKata / wpm);
+        const result = `${rumus} min`
+        
+        durasi.innerText = result
+    }
+    reading();
+</script>
+{% endblock %}

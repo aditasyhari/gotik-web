@@ -1,0 +1,96 @@
+{% extends "frontend/layouts/base-fullscreen.html" %}
+
+{% block title %} Scan {% endblock %}
+
+{% block css %}
+<style>
+    .scan-header {
+        margin-bottom: 100px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div id="details" class="basic-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="scan-header">
+                    <h2>Scan Motif Batik</h2>
+                    <p>Unggah gambar motif batik, kemudian Gotik akan mengidentifikasi motif batik tersebut</p>
+                    <form id="upload" method="post" action="" enctype="multipart/form-data">
+					    {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                              <input type="file" name="filePath" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept="image/*" onchange="predict()">
+                              <label class="custom-file-label" for="inputGroupFile01">Pilih File</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% if filePathName %}
+                <div class="col-lg-7">
+                    <div class="image-container">
+                        <img class="img-fluid" src="/static/images{{filePathName}}" alt="alternative">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="text-container">
+                        <div class="section-title">Hasil</div>
+                        <h2 class="text-capitalize">{{ predictedLabel }}</h2>
+                        <p>Untuk mengetahui lebih detail tentang batik tersebut, bisa klik tombol dibawah ini. </p>
+                        <a class="btn-solid-reg popup-with-move-anim" href="#details-lightbox">Detail</a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-lg-7">
+                    <div class="image-container">
+                        <img class="img-fluid" src="/static/frontend/images/Not-image.png" alt="alternative">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="text-container">
+                        <div class="section-title">Hasil</div>
+                        <h2>Tidak Ada Gambar</h2>
+                        <p>Belum ada gambar, tidak ada hasil </p>
+                        <!-- <a class="btn-solid-reg popup-with-move-anim" href="#details-lightbox">Detail</a> -->
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% if filePathName %}
+<div id="details-lightbox" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div class="row">
+        <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+        <div class="col-lg-5">
+            <div class="image-container">
+                <img class="img-fluid" src="/static/images{{filePathName}}" alt="alternative">
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <h1>{{ sejarah.judul }}</h1>
+            <hr>
+            {% autoescape off %}{{ sejarah.isi }}{% endautoescape %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock content %}
+
+{% block js %}
+<script>
+    function predict() {
+        $('#upload').submit();
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,290 @@
+{% extends "admin/layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+{% block css %}
+    <link rel="stylesheet" href="/static/assets/plugins/chart-morris/css/morris.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Total Dataset (citra)</h5>
+                                </div>
+                                <div class="card-block">
+                                    <div id="dataset-donut" style="height:300px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Training Model</h5>
+                                </div>
+                                <div class="card-block">
+                                    <div id="dataset-bar-stacked-chart" style="height:300px"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--[ Recent Users ] start-->
+                        <div class="col-xl-8 col-md-6">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Berita</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active show" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Toko</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5%">No</th>
+                                                <th style="width: 70%">Judul</th>
+                                                <th style="width: 20%">Tanggal</th>
+                                                <th style="width: 5%" class="text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><h6 class="m-0">1</h6></td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium laboriosam tenetur, quos hic amet nemo?</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="m-0">24 Juli 2021</h6>
+                                                </td>
+                                                <td class="text-right"><a href=""><i class="fas fa-eye text-c-yellow"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><h6 class="m-0">2</h6></td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium laboriosam tenetur, quos hic amet nemo?</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="m-0">24 Juli 2021</h6>
+                                                </td>
+                                                <td class="text-right"><a href=""><i class="fas fa-eye text-c-yellow"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><h6 class="m-0">3</h6></td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium laboriosam tenetur, quos hic amet nemo?</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="m-0">24 Juli 2021</h6>
+                                                </td>
+                                                <td class="text-right"><a href=""><i class="fas fa-eye text-c-yellow"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><h6 class="m-0">4</h6></td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium laboriosam tenetur, quos hic amet nemo?</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="m-0">24 Juli 2021</h6>
+                                                </td>
+                                                <td class="text-right"><a href=""><i class="fas fa-eye text-c-yellow"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="tab-pane fade active show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5%">No</th>
+                                                <th style="width: 40%">Nama Toko</th>
+                                                <th style="width: 50%">Alamat</th>
+                                                <th style="width: 5%" class="text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <h6>1</h6>
+                                                </td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Sisik Melik Art Shop Batik</h6>
+                                                </td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Kampungmandar, Kec. Banyuwangi, Kab. banyuwangi</h6>
+                                                </td>
+                                                <td class="text-right"><a href=""><i class="fas fa-eye text-c-yellow"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h6>2</h6>
+                                                </td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Galeri Batik Sekar Blambangan</h6>
+                                                </td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Srono Kebaman, Kec. Srono, Kab. Banyuwangi</h6>
+                                                </td>
+                                                <td class="text-right"><a href=""><i class="fas fa-eye text-c-yellow"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h6>3</h6>
+                                                </td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Galeri Sukur Batik Banyuwangi</h6>
+                                                </td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Jl. Ken Arok, Krajan, Karangbendo, Kec. Rogojampi, Kab. Banyuwangi</h6>
+                                                </td>
+                                                <td class="text-right"><a href=""><i class="fas fa-eye text-c-yellow"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h6>4</h6>
+                                                </td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Rumah Batik Pringgolokusumo</h6>
+                                                </td>
+                                                <td style="white-space: normal;">
+                                                    <h6 class="m-0">Labansukadi, Ds. Kawang Labanasem, Kec. kabat, Kab. Banyuwangi</h6>
+                                                </td>
+                                                <td class="text-right"><a href=""><i class="fas fa-eye text-c-yellow"></i></a></td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!--[ Recent Users ] end-->
+
+                        <!-- [ statistics year chart ] start -->
+                        <div class="col-xl-4 col-md-6" style="margin-top: 40px;">
+                            <div class="card">
+                                <div class="card-block border-bottom">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <i class="feather icon-file-text f-30 text-c-green"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="f-w-300">20</h3>
+                                            <span class="d-block text-uppercase">TOTAL BERITA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <i class="feather icon-map-pin f-30 text-c-blue"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="f-w-300">15</h3>
+                                            <span class="d-block text-uppercase">TOTAL TOKO</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ statistics year chart ] end -->
+
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block js %}
+
+    <script src="/static/assets/plugins/chart-morris/js/raphael.min.js"></script>
+    <script src="/static/assets/plugins/chart-morris/js/morris.min.js"></script>
+    <script src="/static/assets/js/pages/chart-morris-custom.js"></script>
+
+    <script>
+        // [ Donut-chart ] Start
+        var graph = Morris.Donut({
+            element: 'dataset-donut',
+            data: [{
+                    value: 170,
+                    label: 'Gajah Uling'
+                },
+                {
+                    value: 102,
+                    label: 'Beras Kutah'
+                },
+                {
+                    value: 100,
+                    label: 'Sekar Jagad'
+                },
+                {
+                    value: 102,
+                    label: 'Mata Ikan'
+                },
+                {
+                    value: 277,
+                    label: 'Kopi Sembur'
+                },
+                {
+                    value: 124,
+                    label: 'Lainnya'
+                }
+            ],
+            colors: [
+                '#1de9b6',
+                '#A389D4',
+                '#04a9f5',
+                '#1dc4e9',
+            ],
+            resize: true,
+            formatter: function(x) {
+                return "val : " + x
+            }
+        });    
+        // [ Donut-chart ] end
+
+        Morris.Bar({
+            element: 'dataset-bar-stacked-chart',
+            data: [{
+                    y: 'Training',
+                    a: 697
+                },
+                {
+                    y: 'Validation',
+                    a: 87
+                },
+                {
+                    y: 'Testing',
+                    a: 87
+                }
+            ],
+            xkey: 'y',
+            stacked: true,
+            barSizeRatio: 0.50,
+            barGap: 1,
+            resize: true,
+            responsive:true,
+            ykeys: ['a'],
+            labels: ['Data'],
+            barColors: ["0-#1de9b6-#1dc4e9", "0-#899FD4-#A389D4", "#04a9f5"]
+        });
+        // [ bar-stacked ] chart end
+
+    </script>
+{% endblock %}
